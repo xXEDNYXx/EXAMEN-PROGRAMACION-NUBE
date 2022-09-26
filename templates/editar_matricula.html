@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <a aria-hidden="true">&times;;</a>
+            </button>
+        </div>
+        
+    {% endfor %}
+
+
+    {% if codEstudiante  %}
+        <h1>Hello {{ codEstudiante }}</h1>
+        <br/>        
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">CODIGO DE LA MATRICULA</th>
+                <th scope="col">CODIGO DEL ESTUDIANTE</th>
+                <th scope="col">CODIGO DEL CURSO</th>
+                <th scope="col">ACCION</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for our_matriculas in our_matricula %}
+              <tr>
+                <th scope="row">{{ our_matriculas.codigo }}</th>
+                <td>{{ our_matriculas.codEstudiante }}</td>
+                <td>{{ our_matriculas.codCurso}}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ url_for('update_matricula', codigo=our_matriculas.codigo) }}">Editar</a>
+                    <a class="btn btn-danger" href="{{ url_for('delete_matricula', codigo =our_matriculas.codigo) }}">Eliminar</a>
+                    <br>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>         
+    {% else %}
+        <h1>ACTUALIZAR DATOS DE MATRICULA</h1>
+        <br/>
+        <form action="/matricula_edit/{{mat.codigo}}" method="POST">
+            
+            {{ form.hidden_tag() }}
+            <label for="exampleFormControlInput1" class="form-label">CODIGO DE LA MATRICULA</label>
+            <input type="text" class="form-control" name="codigo" value="{{mat.codigo}}" required>
+            <br>
+            <label for="exampleFormControlInput1" class="form-label">CODIGO DEL ESTUDIANTE</label>
+            <input type="text" class="form-control" name="codEstudiante" value="{{mat.codEstudiante}}" required>
+            <br>
+            <label for="exampleFormControlTextarea1" class="form-label">CODIGO DEL CURSO</label>
+            <input type="text" class="form-control" name="codCurso" value="{{mat.codCurso}}" required>
+            <br/>
+            <button type="submit" class="btn btn-warning">ACTUALIZAR</button>
+            
+        </form>
+    {% endif %}
+{% endblock %}

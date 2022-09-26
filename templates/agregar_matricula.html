@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <a aria-hidden="true">&times;;</a>
+            </button>
+        </div>
+        
+    {% endfor %}
+
+
+    {% if codigo %}
+        <h1>Hello {{ codigo }}</h1>
+        <br/>
+        {% for our_matriculas in our_matricula%}
+            {{ our_matriculas.codigo }}. {{ our_matriculas.codEstudiante}} - {{ our_matriculas.codCurso}}<br/>
+        {% endfor %}
+    {% else %}
+        <h1>CREACIÓN DE MATRICULA</h1>
+        <br/>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <label for="">CODIGO DE LA MATRICULA</label>
+            {{ form.codigo(class="form-control") }}
+            <br/>
+            <label for="">CODIGO DEL ESTUDIANTE</label>
+            {{ form.codEstudiante(class="form-control") }}
+            <br/>
+            <label for="">CODIGO DEL CURSO</label>
+            {{ form.codCurso(class="form-control") }}
+            <br/>
+            <button type="submit" class="btn btn-warning">GUARDAR MATRICULA</button>
+        </form>
+
+        <!--JacK-->
+        <br/>
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">CÓDIGO MATRICULA</th>
+                <th scope="col">CÓDIGO ESTUDIANTE</th>
+                <th scope="col">CÓDIGO CURSO</th>
+                <th scope="col">ACCIÓN</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for our_matriculas in our_matricula %}
+              <tr>
+                <th scope="row">{{ our_matriculas.codigo }}</th>
+                <td>{{ our_matriculas.codEstudiante }}</td>
+                <td>{{ our_matriculas.codCurso }}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ url_for('update_matricula', codigo=our_matriculas.codigo) }}">EDITAR</a>
+                    <a class="btn btn-danger" href="{{ url_for('delete_matricula', codigo=our_matriculas.codigo) }}">ELIMINAR</a>
+                    <br>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <!--JacK-->
+
+
+    {% endif %}
+{% endblock %}
