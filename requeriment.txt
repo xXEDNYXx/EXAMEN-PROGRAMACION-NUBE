@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 click==8.1.3
 colorama==0.4.5
 distlib==0.3.5
@@ -17,3 +18,24 @@ virtualenv==20.16.3
 Werkzeug==2.2.2
 WTForms==3.0.1
 zipp==3.8.1
+=======
+click==8.1.3
+colorama==0.4.5
+distlib==0.3.5
+filelock==3.7.1
+Flask==2.2.2
+Flask-SQLAlchemy==2.5.1
+Flask-WTF==1.0.1
+greenlet==1.1.3
+importlib-metadata==4.12.0
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.1
+mysqlclient==2.1.1
+platformdirs==2.5.2
+SQLAlchemy==1.4.40
+virtualenv==20.16.3
+Werkzeug==2.2.2
+WTForms==3.0.1
+zipp==3.8.1
+>>>>>>> fc4872dc62f75aee1f978be8533777bbc9ae5c09
